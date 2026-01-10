@@ -1,3 +1,70 @@
+Problem statement
+You have been given a Binary Search Tree of integers. You are supposed to convert it to a greater sum tree such that the value of every node in the given BST is replaced with the sum of the values of all the nodes which are greater than the value of the current node in the tree.
+
+A Binary Search Tree is a tree, whose internal nodes each store a value greater than all the values in the node's left subtree and less than those in its right subtree.
+
+Note :
+
+You need to modify the given tree only. You are not allowed to create a new tree
+
+
+
+Sample Output 
+119 137 75 139 130 104 0 40
+
+You need to modify the given tree only. You are not allowed to create a new tree.
+For example:
+For the given binary search tree
+
+11 will be replaced by {15 + 29 + 35 + 40}, i.e. 119.
+2 will be replaced by {7 + 11 + 15 + 29 + 35 + 40}, i.e. 137.
+29 will be replaced by {35 + 40}, i.e. 75.
+1 will be replaced by {2 + 7 + 11 + 15 + 29 + 35 + 40}, i.e. 139.
+7 will be replaced by {11 + 15 + 29 + 35 + 40}, i.e. 130.
+15 will be replaced by {15 + 29 + 35 + 40}, i.e. 104.
+40 will be replaced by 0 {as there is no node with a value greater than 40}.
+35 will be replaced by {40}, i.e. 40.
+
+
+import java.util.* ;
+import java.io.*; 
+/************************************************************
+
+    Following is the TreeNode class structure
+
+    class TreeNode<T> {
+        T val;
+        TreeNode<T> left;
+        TreeNode<T> right;
+
+        public TreeNode(T val) {
+            this.val = val;
+            left = null
+            right = null
+        }
+    };
+
+ ************************************************************/
+ 
+class Solution{
+    static int sum=0;
+	public static TreeNode<Integer> convertBstToGreaterSum(TreeNode<Integer> root)
+	{
+        sum=0;
+		// Write your code here.
+        inorder(root);
+        return root;
+	}
+    public static void inorder(TreeNode<Integer>root)
+    {
+        
+        if(root==null) return ;
+        inorder(root.right);
+         sum=sum+root.val;
+          root.val=sum-root.val;
+        inorder(root.left);
+    }
+}
 
 
 
@@ -15,6 +82,5 @@
 
 
 
-<img width="1262" height="414" alt="Image" src="https://github.com/user-attachments/assets/da4c67d5-bbec-4f75-8646-004ba8d87589" />
 
 
