@@ -1,1 +1,31 @@
-
+class Node
+{
+int data;
+Node left;
+Node right;
+ Node(int data)
+{
+this.data=data;
+this.left=null;
+this.right=null;
+}
+}
+import java.util.*;
+class Solution
+{
+public static int floorinbst(Node root,int x)
+{
+int floor=-1;
+if(root==null) return -1;
+if(root.data==x) return x;
+if(root.data>x)
+{
+return floorinbst(root.left,x);
+}
+else
+{
+ floor=floorinbst(root.right,x);
+}
+return (floor!=-1) ? floor:root.data;
+}
+}
