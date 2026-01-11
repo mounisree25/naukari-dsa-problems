@@ -1,1 +1,58 @@
+You are given the root of a binary tree, and your task is to return its top view. The top view of a binary tree is the set of nodes visible when the tree is viewed from the top.
+Note:
+Return the nodes from the leftmost node to the rightmost node.
+If multiple nodes overlap at the same horizontal position, only the topmost (closest to the root) node is included in the view. 
+Input: root = [1, 2, 3]
+Output: [2, 1, 3]
 
+class Node
+{
+int data;
+Node left;
+Node right;
+Node(int data)
+{
+this.data=data;
+this.left=null;
+this.right=null;
+}
+}
+import java.util.*;
+class Pair
+{
+int val;
+Node  root;
+Pair(int val,Node root)
+{
+this.val=val;
+this.root=root;
+}
+}
+class Solution
+{
+public static ArrayList<Integer> topview(Node root)
+{
+HashMap<Integer,Integer>map=new HashMap<>();
+Queue<Pair>queue=new LinkedList<>();
+queue.add(new Pair(0,root));
+ArrayList<Integer>result=new ArrayList<>();
+while(!queue.isEmpty())
+{
+Pair curr=queue.poll();
+Node node=curr.root;
+int h=curr.val;
+if(!map.containsKey(h))
+{
+map.put(h,node.data);
+}
+if(node.left!=null) queue.offer(new Pair(h-1,node.left));
+if(node.right!=null) queue.offer(new Pair(h+1,node.right))
+}
+for(int num:map.values())
+{
+result.add(num);
+}
+Collections.sort(result);
+return result;
+}
+}
