@@ -24,16 +24,18 @@ class Solution
 public static int CeilBst(Node root,int x)
 {
 int ceil=-1;
-if(root==null) return -1;
-if(root.data==x) return x;
-if(root.data<x)
+while(root!=null)
 {
-return CeilBst(root.right,x);
+if(root.data>x)
+{
+ceil=root.data;
+ root=root.left;
 }
 else
 {
-ceil=CeilBst(root.left,x);
+root=root.right;
 }
-return ceil>=x ? ceil:root.data;
+}
+return ceil;
 }
 }
