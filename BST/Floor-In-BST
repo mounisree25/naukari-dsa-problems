@@ -16,16 +16,18 @@ class Solution
 public static int floorinbst(Node root,int x)
 {
 int floor=-1;
-if(root==null) return -1;
-if(root.data==x) return x;
-if(root.data>x)
+while(root!=null)
 {
-return floorinbst(root.left,x);
+if(root.data<x)
+{
+floor=root.data;
+root=root.right;
 }
 else
 {
- floor=floorinbst(root.right,x);
+root=root.left;
 }
-return (floor!=-1) ? floor:root.data;
+}
+return floor;
 }
 }
