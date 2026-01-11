@@ -1,1 +1,31 @@
+Problem statement
+You are given two binary trees with 'n' and 'm' nodes respectively.
+You need to return true if the two trees are identical. Otherwise, return false
+Sample input 1 :
+5 2 3 -1 6 -1 -1 -1 -1
+5 2 3 -1 6 -1 -1 -1 -1
+Sample output 1 :
+True
 
+import java.util.*;
+class Node
+{
+int data;
+Node left;
+Node right;
+Node(int data)
+{
+this.data=data;
+this.right=null;
+this.left=null;
+}
+}
+class Solution
+{
+public static boolean validatebst(Node root1,Node root2)
+{
+if(root1==null && root2==null) return true;
+if(root1==null || root2==null) return false;
+return root1.data==root2.data && validatebst(root1.left,root2.left) && validatebst(root1.right,root2.right);
+}
+}
