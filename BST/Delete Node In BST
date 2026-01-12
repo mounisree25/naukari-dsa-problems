@@ -1,1 +1,56 @@
+Problem statement
+You have been given a Binary Search Tree of integers with ‘N’ nodes. You are also given data of a node of this tree. Your task is to delete the given node from the BST.
+A binary search tree (BST) is a binary tree data structure that has the following properties:
+• The left subtree of a node contains only nodes with data less than the node’s data.
+• The right subtree of a node contains only nodes with data greater than the node’s data.
+• Both the left and right subtrees must also be binary search trees.
+Sample Input 1:
+15 10 20 8 12 16 25 -1 -1 -1 -1 -1 -1 -1 -1
+10
+Sample output 1:
+8 12 15 16 20 25
 
+class Node
+{
+int data;
+Node left;
+Node right;
+Node(int data)
+{
+this.data=data;
+this.left=null;
+this.right=null;
+}
+}
+import java.util.*;
+class Solution
+{
+public static int maxbst(Node root)
+{
+Node temp=root;
+ while(temp.right!=null)
+{
+temp=temp.right;
+}
+return temp.data;
+}
+public static Node deleteNode(Node root,int key)
+{
+  if(root==null) return null;
+if(root.data==key)
+{
+// 0-child
+if(root.left==null && root.right==null) return null;
+// 1-child
+if(root.left!=null && root.right==null) return root.left;
+// 1-child
+if(root.right!=null && root.left==null) return root.right;
+// 2-child
+int leftmax=maxbst(root.left);
+root.data=leftmax;
+root.left=deleteNode(root.left,leftmax);
+}
+else if(key<root.data) root.left=deleteNode(root.left,key);
+else root.right=deleteNode(root.right,key);
+}
+}
